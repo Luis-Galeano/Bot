@@ -1,0 +1,6 @@
+/chatbot-ejb/target/
+/chatbot-ear/target/
+/chatbot-web/target/
+/chatbot-ejb/nb-configuration.xml
+/chatbot-ear/nb-configuration.xml
+/chatbot-web/nb-configuration.xml
