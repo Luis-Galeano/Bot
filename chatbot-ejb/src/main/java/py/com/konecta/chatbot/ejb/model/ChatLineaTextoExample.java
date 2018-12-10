@@ -175,52 +175,62 @@ public class ChatLineaTextoExample {
             return (Criteria) this;
         }
 
-        public Criteria andIdUsuarioEqualTo(Long value) {
+        public Criteria andIdUsuarioEqualTo(String value) {
             addCriterion("id_usuario =", value, "idUsuario");
             return (Criteria) this;
         }
 
-        public Criteria andIdUsuarioNotEqualTo(Long value) {
+        public Criteria andIdUsuarioNotEqualTo(String value) {
             addCriterion("id_usuario <>", value, "idUsuario");
             return (Criteria) this;
         }
 
-        public Criteria andIdUsuarioGreaterThan(Long value) {
+        public Criteria andIdUsuarioGreaterThan(String value) {
             addCriterion("id_usuario >", value, "idUsuario");
             return (Criteria) this;
         }
 
-        public Criteria andIdUsuarioGreaterThanOrEqualTo(Long value) {
+        public Criteria andIdUsuarioGreaterThanOrEqualTo(String value) {
             addCriterion("id_usuario >=", value, "idUsuario");
             return (Criteria) this;
         }
 
-        public Criteria andIdUsuarioLessThan(Long value) {
+        public Criteria andIdUsuarioLessThan(String value) {
             addCriterion("id_usuario <", value, "idUsuario");
             return (Criteria) this;
         }
 
-        public Criteria andIdUsuarioLessThanOrEqualTo(Long value) {
+        public Criteria andIdUsuarioLessThanOrEqualTo(String value) {
             addCriterion("id_usuario <=", value, "idUsuario");
             return (Criteria) this;
         }
 
-        public Criteria andIdUsuarioIn(List<Long> values) {
+        public Criteria andIdUsuarioLike(String value) {
+            addCriterion("id_usuario like", value, "idUsuario");
+            return (Criteria) this;
+        }
+
+        public Criteria andIdUsuarioNotLike(String value) {
+            addCriterion("id_usuario not like", value, "idUsuario");
+            return (Criteria) this;
+        }
+
+        public Criteria andIdUsuarioIn(List<String> values) {
             addCriterion("id_usuario in", values, "idUsuario");
             return (Criteria) this;
         }
 
-        public Criteria andIdUsuarioNotIn(List<Long> values) {
+        public Criteria andIdUsuarioNotIn(List<String> values) {
             addCriterion("id_usuario not in", values, "idUsuario");
             return (Criteria) this;
         }
 
-        public Criteria andIdUsuarioBetween(Long value1, Long value2) {
+        public Criteria andIdUsuarioBetween(String value1, String value2) {
             addCriterion("id_usuario between", value1, value2, "idUsuario");
             return (Criteria) this;
         }
 
-        public Criteria andIdUsuarioNotBetween(Long value1, Long value2) {
+        public Criteria andIdUsuarioNotBetween(String value1, String value2) {
             addCriterion("id_usuario not between", value1, value2, "idUsuario");
             return (Criteria) this;
         }

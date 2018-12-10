@@ -85,6 +85,7 @@ public class BotBean {
     }
 
     public GenericResponse getBotResponse(Trigger trigger) {
+        logger.info("{}",trigger);
         GenericResponse resp = new GenericResponse();
         try {
             // agregar la variable userId al usuario
@@ -92,34 +93,34 @@ public class BotBean {
                 bot.setUservar(trigger.getCodigoUsuario(), "userId", trigger.getCodigoUsuario());
             }
             // obtener usuario de la bd por su chatId
-            ChatUsuariosExample uexample = new ChatUsuariosExample();
-            uexample.createCriteria().andIdCuentaUsuarioEqualTo(bot.getUservar(trigger.getCodigoUsuario(), "userId"));
-            ChatUsuarios user = usuarioDao.selectOneByExample(uexample);
+//            ChatUsuariosExample uexample = new ChatUsuariosExample();
+//            uexample.createCriteria().andIdCuentaUsuarioEqualTo(trigger.getCodigoUsuario());
+//            ChatUsuarios user = usuarioDao.selectOneByExample(uexample);
             
             // agregar conversacion entrante en la bd
             ChatLineaTexto conversacionEntrante = new ChatLineaTexto();
             conversacionEntrante.setDireccion("I");
             conversacionEntrante.setFecha(Calendar.getInstance().getTime());
             conversacionEntrante.setIdTransporte(1l);
-            conversacionEntrante.setIdUsuario(user.getIdUsuario());
+            conversacionEntrante.setIdUsuario(trigger.getCodigoUsuario());
             conversacionEntrante.setLineaTexto(trigger.getMensaje());
             conversacionDao.insertSelective(conversacionEntrante);
             
             bot.loadDirectory("/opt/rs/scripts/");
             bot.sortReplies();
                
-            String maxTime = queryDao.getConfigValue(MAX_TIME);
-            Long miliSegundosMaxTime = Long.valueOf(maxTime);
-            Date currentTime = Calendar.getInstance().getTime();
+            //String maxTime = queryDao.getConfigValue(MAX_TIME);
+            //Long miliSegundosMaxTime = Long.valueOf(maxTime);
+            //Date currentTime = Calendar.getInstance().getTime();
             
             // salir del topico despues de un periodo de tiempo de inactividad del usuario
-            if (user.getUltimaConversacion() != null){
-                 Long milisegundos = currentTime.getTime() - user.getUltimaConversacion().getTime();
-                 if  (milisegundos > miliSegundosMaxTime){
-                     logger.info("Salir del topico actual");
-                     bot.setUservar(trigger.getCodigoUsuario(), "topic", "random");
-                 }
-            }
+//            if (user.getUltimaConversacion() != null){
+//                Long milisegundos = currentTime.getTime() - user.getUltimaConversacion().getTime();
+//                if  (milisegundos > miliSegundosMaxTime){
+//                    logger.info("Salir del topico actual");
+//                    bot.setUservar(trigger.getCodigoUsuario(), "topic", "random");
+//                }
+//            }
             
             logger.info("MENSAJE IN: {} || {}", trigger.getMensaje(), trigger.getCodigoUsuario());
             String reply = bot.reply(trigger.getCodigoUsuario(), trigger.getMensaje());
@@ -129,13 +130,13 @@ public class BotBean {
             conversacionSaliente.setDireccion("O");
             conversacionSaliente.setFecha(Calendar.getInstance().getTime());
             conversacionSaliente.setIdTransporte(1l);
-            conversacionSaliente.setIdUsuario(user.getIdUsuario());
+            conversacionSaliente.setIdUsuario(trigger.getCodigoUsuario());
             conversacionSaliente.setLineaTexto(reply);
             conversacionDao.insertSelective(conversacionSaliente);
             
-            // actualizar ultima conversacion del usuario
-            user.setUltimaConversacion(currentTime);
-            usuarioDao.updateByPrimaryKeySelective(user);
+//            // actualizar ultima conversacion del usuario
+//            user.setUltimaConversacion(currentTime);
+//            usuarioDao.updateByPrimaryKeySelective(user);
             
             resp.setDato(reply);
             resp.setEstado(ESTADO_EXITO);

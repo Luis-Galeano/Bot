@@ -29,7 +29,7 @@ public class ChatLineaTextoSqlProvider {
         sql.INSERT_INTO("chat_linea_texto");
         
         if (record.getIdUsuario() != null) {
-            sql.VALUES("id_usuario", "#{idUsuario,jdbcType=BIGINT}");
+            sql.VALUES("id_usuario", "#{idUsuario,jdbcType=VARCHAR}");
         }
         
         if (record.getIdTransporte() != null) {
@@ -106,7 +106,7 @@ public class ChatLineaTextoSqlProvider {
         }
         
         if (record.getIdUsuario() != null) {
-            sql.SET("id_usuario = #{record.idUsuario,jdbcType=BIGINT}");
+            sql.SET("id_usuario = #{record.idUsuario,jdbcType=VARCHAR}");
         }
         
         if (record.getIdTransporte() != null) {
@@ -134,7 +134,7 @@ public class ChatLineaTextoSqlProvider {
         sql.UPDATE("chat_linea_texto");
         
         sql.SET("id_linea_texto = #{record.idLineaTexto,jdbcType=BIGINT}");
-        sql.SET("id_usuario = #{record.idUsuario,jdbcType=BIGINT}");
+        sql.SET("id_usuario = #{record.idUsuario,jdbcType=VARCHAR}");
         sql.SET("id_transporte = #{record.idTransporte,jdbcType=BIGINT}");
         sql.SET("fecha = #{record.fecha,jdbcType=TIMESTAMP}");
         sql.SET("direccion = #{record.direccion,jdbcType=VARCHAR}");
@@ -150,7 +150,7 @@ public class ChatLineaTextoSqlProvider {
         sql.UPDATE("chat_linea_texto");
         
         sql.SET("id_linea_texto = #{record.idLineaTexto,jdbcType=BIGINT}");
-        sql.SET("id_usuario = #{record.idUsuario,jdbcType=BIGINT}");
+        sql.SET("id_usuario = #{record.idUsuario,jdbcType=VARCHAR}");
         sql.SET("id_transporte = #{record.idTransporte,jdbcType=BIGINT}");
         sql.SET("fecha = #{record.fecha,jdbcType=TIMESTAMP}");
         sql.SET("direccion = #{record.direccion,jdbcType=VARCHAR}");
@@ -165,7 +165,7 @@ public class ChatLineaTextoSqlProvider {
         sql.UPDATE("chat_linea_texto");
         
         if (record.getIdUsuario() != null) {
-            sql.SET("id_usuario = #{idUsuario,jdbcType=BIGINT}");
+            sql.SET("id_usuario = #{idUsuario,jdbcType=VARCHAR}");
         }
         
         if (record.getIdTransporte() != null) {

@@ -35,7 +35,7 @@ public interface ChatLineaTextoMapper {
         "insert into chat_linea_texto (id_usuario, id_transporte, ",
         "fecha, direccion, ",
         "linea_texto)",
-        "values (#{idUsuario,jdbcType=BIGINT}, #{idTransporte,jdbcType=BIGINT}, ",
+        "values (#{idUsuario,jdbcType=VARCHAR}, #{idTransporte,jdbcType=BIGINT}, ",
         "#{fecha,jdbcType=TIMESTAMP}, #{direccion,jdbcType=VARCHAR}, ",
         "#{lineaTexto,jdbcType=LONGVARCHAR})"
     })
@@ -49,7 +49,7 @@ public interface ChatLineaTextoMapper {
     @SelectProvider(type=ChatLineaTextoSqlProvider.class, method="selectByExampleWithBLOBs")
     @Results({
         @Result(column="id_linea_texto", property="idLineaTexto", jdbcType=JdbcType.BIGINT, id=true),
-        @Result(column="id_usuario", property="idUsuario", jdbcType=JdbcType.BIGINT),
+        @Result(column="id_usuario", property="idUsuario", jdbcType=JdbcType.VARCHAR),
         @Result(column="id_transporte", property="idTransporte", jdbcType=JdbcType.BIGINT),
         @Result(column="fecha", property="fecha", jdbcType=JdbcType.TIMESTAMP),
         @Result(column="direccion", property="direccion", jdbcType=JdbcType.VARCHAR),
@@ -60,7 +60,7 @@ public interface ChatLineaTextoMapper {
     @SelectProvider(type=ChatLineaTextoSqlProvider.class, method="selectByExampleWithBLOBs")
     @Results({
         @Result(column="id_linea_texto", property="idLineaTexto", jdbcType=JdbcType.BIGINT, id=true),
-        @Result(column="id_usuario", property="idUsuario", jdbcType=JdbcType.BIGINT),
+        @Result(column="id_usuario", property="idUsuario", jdbcType=JdbcType.VARCHAR),
         @Result(column="id_transporte", property="idTransporte", jdbcType=JdbcType.BIGINT),
         @Result(column="fecha", property="fecha", jdbcType=JdbcType.TIMESTAMP),
         @Result(column="direccion", property="direccion", jdbcType=JdbcType.VARCHAR),
@@ -71,7 +71,7 @@ public interface ChatLineaTextoMapper {
     @SelectProvider(type=ChatLineaTextoSqlProvider.class, method="selectByExample")
     @Results({
         @Result(column="id_linea_texto", property="idLineaTexto", jdbcType=JdbcType.BIGINT, id=true),
-        @Result(column="id_usuario", property="idUsuario", jdbcType=JdbcType.BIGINT),
+        @Result(column="id_usuario", property="idUsuario", jdbcType=JdbcType.VARCHAR),
         @Result(column="id_transporte", property="idTransporte", jdbcType=JdbcType.BIGINT),
         @Result(column="fecha", property="fecha", jdbcType=JdbcType.TIMESTAMP),
         @Result(column="direccion", property="direccion", jdbcType=JdbcType.VARCHAR)
@@ -81,7 +81,7 @@ public interface ChatLineaTextoMapper {
     @SelectProvider(type=ChatLineaTextoSqlProvider.class, method="selectByExample")
     @Results({
         @Result(column="id_linea_texto", property="idLineaTexto", jdbcType=JdbcType.BIGINT, id=true),
-        @Result(column="id_usuario", property="idUsuario", jdbcType=JdbcType.BIGINT),
+        @Result(column="id_usuario", property="idUsuario", jdbcType=JdbcType.VARCHAR),
         @Result(column="id_transporte", property="idTransporte", jdbcType=JdbcType.BIGINT),
         @Result(column="fecha", property="fecha", jdbcType=JdbcType.TIMESTAMP),
         @Result(column="direccion", property="direccion", jdbcType=JdbcType.VARCHAR)
@@ -96,7 +96,7 @@ public interface ChatLineaTextoMapper {
     })
     @Results({
         @Result(column="id_linea_texto", property="idLineaTexto", jdbcType=JdbcType.BIGINT, id=true),
-        @Result(column="id_usuario", property="idUsuario", jdbcType=JdbcType.BIGINT),
+        @Result(column="id_usuario", property="idUsuario", jdbcType=JdbcType.VARCHAR),
         @Result(column="id_transporte", property="idTransporte", jdbcType=JdbcType.BIGINT),
         @Result(column="fecha", property="fecha", jdbcType=JdbcType.TIMESTAMP),
         @Result(column="direccion", property="direccion", jdbcType=JdbcType.VARCHAR),
@@ -118,7 +118,7 @@ public interface ChatLineaTextoMapper {
 
     @Update({
         "update chat_linea_texto",
-        "set id_usuario = #{idUsuario,jdbcType=BIGINT},",
+        "set id_usuario = #{idUsuario,jdbcType=VARCHAR},",
           "id_transporte = #{idTransporte,jdbcType=BIGINT},",
           "fecha = #{fecha,jdbcType=TIMESTAMP},",
           "direccion = #{direccion,jdbcType=VARCHAR},",
@@ -129,7 +129,7 @@ public interface ChatLineaTextoMapper {
 
     @Update({
         "update chat_linea_texto",
-        "set id_usuario = #{idUsuario,jdbcType=BIGINT},",
+        "set id_usuario = #{idUsuario,jdbcType=VARCHAR},",
           "id_transporte = #{idTransporte,jdbcType=BIGINT},",
           "fecha = #{fecha,jdbcType=TIMESTAMP},",
           "direccion = #{direccion,jdbcType=VARCHAR}",

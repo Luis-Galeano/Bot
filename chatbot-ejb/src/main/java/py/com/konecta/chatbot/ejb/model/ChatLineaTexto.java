@@ -6,7 +6,7 @@ import java.util.Date;
 public class ChatLineaTexto implements Serializable {
     private Long idLineaTexto;
 
-    private Long idUsuario;
+    private String idUsuario;
 
     private Long idTransporte;
 
@@ -26,11 +26,11 @@ public class ChatLineaTexto implements Serializable {
         this.idLineaTexto = idLineaTexto;
     }
 
-    public Long getIdUsuario() {
+    public String getIdUsuario() {
         return idUsuario;
     }
 
-    public void setIdUsuario(Long idUsuario) {
+    public void setIdUsuario(String idUsuario) {
         this.idUsuario = idUsuario;
     }
 
