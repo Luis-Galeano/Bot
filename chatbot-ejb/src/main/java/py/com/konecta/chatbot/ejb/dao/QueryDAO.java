@@ -5,8 +5,8 @@
  */
 package py.com.konecta.chatbot.ejb.dao;
 
+import java.util.Date;
 import java.util.List;
-import java.util.Map;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 import org.apache.logging.log4j.LogManager;
@@ -61,6 +61,16 @@ public class QueryDAO {
         }
         logger.info("OUT: {}",resp);
         return resp;
+    }
+    
+    public void insertLineaTexto(String direccion, Date fecha,
+            Long idTransporte, String usuario, String lineaTexto){
+        logger.info("IN: {}, {}, {}, {}, {}",direccion,fecha,idTransporte,usuario,lineaTexto);
+        try {
+            mapper.insertLineaTexto(direccion, fecha, idTransporte, usuario, lineaTexto);
+        } catch (Exception e) {
+            logger.error("",e);
+        }
     }
       
 }

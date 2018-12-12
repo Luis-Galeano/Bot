@@ -43,6 +43,13 @@ public class QuerySqlProvider {
                      "where P.descripcion =#{param}";            
         return sql;
     }
+    
+    public String insertLineaTexto(Map<String,Object> param){
+        
+        String sql= "insert into chat_linea_texto (direccion,fecha,id_transporte,id_usuario,linea_texto)\n" +
+                    "VALUES (#{direccion}, #{fecha}, #{transporte}, #{usuario}, #{lineaTexto})";
+        return sql;
+    }
         
     
 }

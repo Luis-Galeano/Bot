@@ -11,9 +11,9 @@ import com.rivescript.RiveScript;
 import com.rivescript.lang.Perl;
 import java.io.File;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
@@ -26,9 +26,9 @@ import py.com.konecta.chatbot.ejb.dto.GenericResponse;
 import py.com.konecta.chatbot.ejb.dto.UserVars;
 import static py.com.konecta.chatbot.ejb.Constantes.ESTADO_ERROR;
 import static py.com.konecta.chatbot.ejb.Constantes.ESTADO_EXITO;
-import static py.com.konecta.chatbot.ejb.Constantes.MAX_TIME;
 import static py.com.konecta.chatbot.ejb.Constantes.MENSAJE_ERROR;
 import static py.com.konecta.chatbot.ejb.Constantes.MENSAJE_EXITO;
+import static py.com.konecta.chatbot.ejb.Constantes.RIVE_DIRECTORY;
 import static py.com.konecta.chatbot.ejb.Constantes.URL_INICIAR_CHAT;
 import py.com.konecta.chatbot.ejb.dao.ChatLineaTextoDAO;
 import py.com.konecta.chatbot.ejb.dao.ChatUsuariosDAO;
@@ -74,9 +74,15 @@ public class BotBean {
 
     @PostConstruct
     public void init() {
-
-        bot = new RiveScript(Config.utf8());
-
+        
+//        Locale.setDefault(new Locale("es"));
+//        Locale.setDefault(new Locale("es","PY"));
+        
+        bot =  new RiveScript(Config.Builder
+        .utf8()
+        .unicodePunctuation("[.,!?;:]")
+        .build());
+        
         File rsp4jFile = new File(BotBean.class.getClassLoader().getResource("rsp4j.pl").getFile());
         bot.setHandler("perl", new Perl(rsp4jFile.getAbsolutePath()));
 
@@ -106,7 +112,8 @@ public class BotBean {
             conversacionEntrante.setLineaTexto(trigger.getMensaje());
             conversacionDao.insertSelective(conversacionEntrante);
             
-            bot.loadDirectory("/opt/rs/scripts/");
+            String directory = queryDao.getConfigValue(RIVE_DIRECTORY);
+            bot.loadDirectory(directory);
             bot.sortReplies();
                
             //String maxTime = queryDao.getConfigValue(MAX_TIME);
@@ -125,6 +132,7 @@ public class BotBean {
             logger.info("MENSAJE IN: {} || {}", trigger.getMensaje(), trigger.getCodigoUsuario());
             String reply = bot.reply(trigger.getCodigoUsuario(), trigger.getMensaje());
             
+            logger.info("{}",reply);
             // agregar conversacion saliente en la bd
             ChatLineaTexto conversacionSaliente = new ChatLineaTexto();
             conversacionSaliente.setDireccion("O");
@@ -132,8 +140,10 @@ public class BotBean {
             conversacionSaliente.setIdTransporte(1l);
             conversacionSaliente.setIdUsuario(trigger.getCodigoUsuario());
             conversacionSaliente.setLineaTexto(reply);
+            //conversacionDao.insertSelective(conversacionSaliente);
+//            queryDao.insertLineaTexto(conversacionSaliente.getDireccion(),conversacionSaliente.getFecha(),
+//                    conversacionSaliente.getIdTransporte(), conversacionSaliente.getIdUsuario(),conversacionSaliente.getLineaTexto());
             conversacionDao.insertSelective(conversacionSaliente);
-            
 //            // actualizar ultima conversacion del usuario
 //            user.setUltimaConversacion(currentTime);
 //            usuarioDao.updateByPrimaryKeySelective(user);

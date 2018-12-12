@@ -43,6 +43,8 @@ public class Constantes {
     public static final String CLIENTE_NOMBRE= "sigo-client-private";
     public static final String DIRECTORIO_BASE= "/opt/rs/scripts/";
     
+    public static final String RIVE_DIRECTORY= "rive_directory";
+    
     public static final String URL_INICIAR_CHAT= "URL_INICIAR_CONVERSACION";
     
     public static final String MAX_TIME= "MAX_CONVERSATION_LAST_TIME";

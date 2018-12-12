@@ -6,6 +6,7 @@
 package py.com.konecta.chatbot.ejb.mapper;
 
 
+import java.util.Date;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.SelectProvider;
@@ -27,4 +28,10 @@ public interface QueryMapper {
     
     @SelectProvider(type=QuerySqlProvider.class, method="getConfigValue")
     public String getConfigValue(@Param("param") String param);
+    
+    @SelectProvider(type=QuerySqlProvider.class, method="insertLineaTexto")
+    public void insertLineaTexto(@Param("direccion") String direccion,
+            @Param("fecha") Date fecha, @Param("transporte") Long transporte,
+            @Param("usuario") String usuario, @Param("lineaTexto") String lineaTexto);
+    
 }
